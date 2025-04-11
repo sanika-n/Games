@@ -1,0 +1,9 @@
+/home/shreyas-karthikeyan/Desktop/game_try1/build/Desktop_Qt_5_15_18_GCC_64bit-Debug/CMakeFiles/game_try1.dir
+/home/shreyas-karthikeyan/Desktop/game_try1/build/Desktop_Qt_5_15_18_GCC_64bit-Debug/CMakeFiles/edit_cache.dir
+/home/shreyas-karthikeyan/Desktop/game_try1/build/Desktop_Qt_5_15_18_GCC_64bit-Debug/CMakeFiles/rebuild_cache.dir
+/home/shreyas-karthikeyan/Desktop/game_try1/build/Desktop_Qt_5_15_18_GCC_64bit-Debug/CMakeFiles/list_install_components.dir
+/home/shreyas-karthikeyan/Desktop/game_try1/build/Desktop_Qt_5_15_18_GCC_64bit-Debug/CMakeFiles/install.dir
+/home/shreyas-karthikeyan/Desktop/game_try1/build/Desktop_Qt_5_15_18_GCC_64bit-Debug/CMakeFiles/install/local.dir
+/home/shreyas-karthikeyan/Desktop/game_try1/build/Desktop_Qt_5_15_18_GCC_64bit-Debug/CMakeFiles/install/strip.dir
+/home/shreyas-karthikeyan/Desktop/game_try1/build/Desktop_Qt_5_15_18_GCC_64bit-Debug/CMakeFiles/game_try1_autogen_timestamp_deps.dir
+/home/shreyas-karthikeyan/Desktop/game_try1/build/Desktop_Qt_5_15_18_GCC_64bit-Debug/CMakeFiles/game_try1_autogen.dir
