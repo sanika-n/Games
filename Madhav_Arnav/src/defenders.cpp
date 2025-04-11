@@ -3,7 +3,7 @@
 #include <limits>
 #include <algorithm>
 #include "defender.h"
-
+//add comment to check if the file is included
 Defender::Defender(std::string type, int damage, int range)
     : type(type), attackPower(damage), range(range) {}
 
