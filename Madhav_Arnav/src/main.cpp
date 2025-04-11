@@ -3,6 +3,7 @@
 #include "defender.h"
 #include <vector>
 #include <string>
+#include <unordered_map>
 #include <limits>
 #include <sstream>
 #include <random>
@@ -22,12 +23,27 @@ int randint(int x, int y) {
 
 int main() {
     vector<vector<Defender*>> lanes(3, vector<Defender*>(10, nullptr));
-    vector<Enemy*> all_enemies;    
+    vector<Enemy*> all_enemies;   
+    unordered_map<string, int> elixir_costs;
+    elixir_costs["PeaShooter"] = 3;
+    elixir_costs["BonkChoy"] = 5;
 
+    int elixir = 0;
     bool gameOver = false;
     int turn = 0;
 
     while (!gameOver) {
+        // Loopign through all defenders and calling their attack function
+        for (int lane = 0; lane < lanes.size(); ++lane) {
+            for (int pos = 0; pos < lanes[lane].size(); ++pos) {
+                Defender* def = lanes[lane][pos];
+                if (def != nullptr) {
+                    def->attack(all_enemies);
+                }
+            }
+        }
+        
+
         // Moving all Enemies
         for (Enemy* enemy : all_enemies) {
             enemy->move();
@@ -41,22 +57,12 @@ int main() {
             }
         }
 
+
         // Spawing a new enemy
         if (randint(1,5)==5) {
             all_enemies.push_back(new Enemy("Goblin", 100, randint(1, 3), 9));
         }
 
-
-        // Loopign through all defenders and calling their attack function
-        for (int lane = 0; lane < lanes.size(); ++lane) {
-            for (int pos = 0; pos < lanes[lane].size(); ++pos) {
-                Defender* def = lanes[lane][pos];
-                if (def != nullptr) {
-                    def->attack(all_enemies);
-                }
-            }
-        }
-        
 
         // Printing the Board
         cout << "============================" << endl;
@@ -86,8 +92,6 @@ int main() {
         }
         cout << "============================" << endl;
 
-        
-
 
         // Taking user input
         if (!gameOver) {
@@ -100,19 +104,34 @@ int main() {
             iss >> command;
         
             if (command == "p") {
-                // Does Nothingx
+                // Does Nothing
             } 
             else if (command == "s") {
                 int lane_number, pos;
-                iss >> lane_number >> pos;
-                lanes[lane_number-1][pos] = new Defender("Archer", 30, 100);
+                string type;
+                iss >> type >> lane_number >> pos;
+                if (elixir_costs.find(type) != elixir_costs.end()) {
+                    if (elixir_costs[type] < elixir) {
+                        cout << "Not enough elixir. Passing turn" << endl;
+                        continue;
+                    }
+                    lanes[lane_number-1][pos] = new Defender(type, lane_number-1, pos);
+                }
+                else {
+                    cout << "Invalid defender type. Passing turn" << endl;
+                    continue;
+                }
             } 
             else {
-                cout << "Invalid command. Please enter 'p' or 's lane_number pos'." << endl;
+                cout << "Invalid command. Passing turn. Please enter 'p' or 's'" << endl;
+                continue;
             }
             turn++;
+            elixir++;
+            if (elixir > 10) {
+                elixir = 10;
+            }
         }
-
     }
 
     // Clean up dynamically allocated memory
