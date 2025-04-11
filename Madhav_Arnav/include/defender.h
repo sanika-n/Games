@@ -17,8 +17,8 @@ public:
     int getRange() const;
     int getLane() const;
 
-private:
     std::string type;
+private:
     int attackPower;
     int range;
     int lane;

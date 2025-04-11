@@ -19,6 +19,13 @@ int randint(int x, int y) {
     return randomNumber;
 }
 
+string instructions = R"(In your turn, you can do two things:
+`p` - Pass your turn
+'s PeaShooter lane_number position' - Spawn a PeaShooter at lane_number and position
+'s BonkChoy lane_number position' - Spawn a BonkChoy at lane_number and position
+
+Note that the PeaShooter requires 3 elixir and the BonkChoy requires 5 elixir.
+Also note like all amazing games like temple run and subway surfers, this game will continue indefinitely.)";
 
 
 int main() {
@@ -31,6 +38,8 @@ int main() {
     int elixir = 0;
     bool gameOver = false;
     int turn = 0;
+
+    cout << instructions << endl;
 
     while (!gameOver) {
         // Loopign through all defenders and calling their attack function
@@ -82,12 +91,17 @@ int main() {
                 }
                 if (!enemy_in_sq) {
                     if (lanes[lane][grid]) {
-                        cout << "[D]";
+                        if (lanes[lane][grid]->type == "PeaShooter") {
+                            cout << "[P]";
+                        } else if (lanes[lane][grid]->type == "BonkChoy") {
+                            cout << "[B]";
+                        } else {
+                            cout << "[D]";
+                        }
                     } else {
                         cout << "[ ]";
                     }
                 }
-
             }
             cout << endl;
         }
