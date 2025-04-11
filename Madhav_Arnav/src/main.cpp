@@ -4,18 +4,54 @@
 #include <vector>
 #include <string>
 #include <limits>
+#include <sstream>
+#include <random>
 
 using namespace std;
+
+
+int randint(int x, int y) {
+    std::random_device rd;                      // Seed
+    std::mt19937 gen(rd());                     // Mersenne Twister RNG
+    std::uniform_int_distribution<> dist(x, y); // Range: 1 to 3
+    int randomNumber = dist(gen);
+    return randomNumber;
+}
+
+
 
 int main() {
     vector<vector<Defender*>> lanes(3, vector<Defender*>(10, nullptr));
 
-    Enemy goblin("Goblin", 100, 1, 9);
+    vector<Enemy*> all_enemies;
+
+
+    
 
     bool gameOver = false;
     int turn = 0;
 
     while (!gameOver) {
+        // Moving all Enemies
+        for (Enemy* enemy : all_enemies) {
+            enemy->move();
+            if (enemy->getPosition() == 0) {
+                cout << enemy->getName() << " has reached your house!" << endl;
+                gameOver = true;
+                break;
+            }
+            else {
+                enemy->printStatus();
+            }
+        }
+
+        // Spawing a new enemy
+        if (randint(1,5)==5) {
+            all_enemies.push_back(new Enemy("Goblin", 100, randint(1, 3), 9));
+        }
+        
+
+        // Printing the Board
         cout << "============================" << endl;
         cout << "Turn " << turn << ":" << endl;
 
@@ -23,56 +59,65 @@ int main() {
             cout << "Lane " << lane + 1 << ": ";
             for (size_t grid = 0; grid < lanes[lane].size(); grid++) {
                 // Check if this cell matches the enemy's position.
-                if ((lane == static_cast<size_t>(goblin.getLane() - 1)) && (grid == static_cast<size_t>(goblin.getPosition()))) {
-                    cout << "[G]";
-                } else if (lanes[lane][grid]) {
-                    cout << "[D]";
-                } else {
-                    cout << "[ ]";
+                bool enemy_in_sq = false;
+                for (Enemy* enemy : all_enemies) {
+                    if ((lane == static_cast<size_t>(enemy->getLane() - 1)) && (grid == static_cast<size_t>(enemy->getPosition()))) {
+                        cout << "[G]";
+                        enemy_in_sq = true;
+                    }
                 }
+                if (!enemy_in_sq) {
+                    if (lanes[lane][grid]) {
+                        cout << "[D]";
+                    } else {
+                        cout << "[ ]";
+                    }
+                }
+
             }
             cout << endl;
         }
         cout << "============================" << endl;
 
-        goblin.printStatus();
+        
 
-        // Optional gameplay logic:
-        // For instance, if a defender occupies the enemy's current cell, let the defender attack.
-        int enemyLaneIndex = goblin.getLane() - 1; // Adjust to 0-index for lanes vector.
-        int enemyPos = goblin.getPosition();
-        if (enemyLaneIndex >= 0 && enemyLaneIndex < static_cast<int>(lanes.size()) &&
-            enemyPos >= 0 && enemyPos < static_cast<int>(lanes[enemyLaneIndex].size())) {
-            if (lanes[enemyLaneIndex][enemyPos]) {
-                cout << lanes[enemyLaneIndex][enemyPos]->getName() << " attacks " 
-                     << goblin.getName() << "!" << endl;
-                lanes[enemyLaneIndex][enemyPos]->attack(goblin);
-            } else {
-                cout << "No defender at the goblin's position." << endl;
+
+        // Taking user input
+        if (!gameOver) {
+            string input;
+            cout << "\n>>>";
+            getline(cin, input);
+        
+            istringstream iss(input);
+            string command;
+            iss >> command;
+        
+            if (command == "p") {
+                // Does Nothing
+            } 
+            else if (command == "s") {
+                int lane_number, pos;
+                iss >> lane_number >> pos;
+                lanes[lane_number-1][pos] = new Defender("Archer", 10);
+            } 
+            else {
+                cout << "Invalid command. Please enter 'p' or 's lane_number pos'." << endl;
             }
+            turn++;
         }
 
-        goblin.move();
-
-        // End game condition: When the goblin reaches the leftmost grid (position 0).
-        if (goblin.getPosition() == 0) {
-            cout << goblin.getName() << " has reached your house! Game Over!" << endl;
-            gameOver = true;
-        }
-
-        // Wait for user input before proceeding to the next turn.
-        cout << "\nPress Enter to continue to the next turn..." << endl;
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        turn++;
     }
 
-    // Clean up dynamically allocated memory for defenders.
+    // Clean up dynamically allocated memory
     for (auto &lane : lanes) {
         for (auto defender : lane) {
             if (defender != nullptr) {
                 delete defender;
             }
         }
+    }
+    for (Enemy* e : all_enemies) {
+        delete e;
     }
 
     return 0;

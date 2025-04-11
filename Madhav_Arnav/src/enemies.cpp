@@ -15,12 +15,7 @@ void Enemy::printStatus() const {
 }
 
 void Enemy::move() {
-    // Move one grid to the left if not already at the left edge.
-    if (position > 0) {
-        position--;
-    } else {
-        std::cout << name << " has reached the left edge!" << std::endl;
-    }
+    position--;
 }
 
 std::string Enemy::getName() const {
