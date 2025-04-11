@@ -48,7 +48,14 @@ int main() {
 
 
         // Loopign through all defenders and calling their attack function
-
+        for (int lane = 0; lane < lanes.size(); ++lane) {
+            for (int pos = 0; pos < lanes[lane].size(); ++pos) {
+                Defender* def = lanes[lane][pos];
+                if (def != nullptr) {
+                    def->attack(all_enemies);
+                }
+            }
+        }
         
 
         // Printing the Board
@@ -93,12 +100,12 @@ int main() {
             iss >> command;
         
             if (command == "p") {
-                // Does Nothing
+                // Does Nothingx
             } 
             else if (command == "s") {
                 int lane_number, pos;
                 iss >> lane_number >> pos;
-                lanes[lane_number-1][pos] = new Defender("Archer", 10, 2);
+                lanes[lane_number-1][pos] = new Defender("Archer", 30, 100);
             } 
             else {
                 cout << "Invalid command. Please enter 'p' or 's lane_number pos'." << endl;
