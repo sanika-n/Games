@@ -43,8 +43,14 @@ int main() {
             }
         }
         
+        // Spawing a new enemy
+        if (randint(1,5)==5) {
+            all_enemies.push_back(new Enemy("Goblin", 100, randint(0, 2), 9+1));
+        }
+
 
         // Moving all Enemies
+        cout << "Elixir: " << elixir << endl;
         for (Enemy* enemy : all_enemies) {
             enemy->move();
             if (enemy->getPosition() == 0) {
@@ -58,11 +64,6 @@ int main() {
         }
 
 
-        // Spawing a new enemy
-        if (randint(1,5)==5) {
-            all_enemies.push_back(new Enemy("Goblin", 100, randint(1, 3), 9));
-        }
-
 
         // Printing the Board
         cout << "============================" << endl;
@@ -74,7 +75,7 @@ int main() {
                 // Check if this cell matches the enemy's position.
                 bool enemy_in_sq = false;
                 for (Enemy* enemy : all_enemies) {
-                    if ((lane == static_cast<size_t>(enemy->getLane() - 1)) && (grid == static_cast<size_t>(enemy->getPosition()))) {
+                    if ((lane == static_cast<size_t>(enemy->getLane())) && (grid == static_cast<size_t>(enemy->getPosition()))) {
                         cout << "[G]";
                         enemy_in_sq = true;
                     }
@@ -111,20 +112,21 @@ int main() {
                 string type;
                 iss >> type >> lane_number >> pos;
                 if (elixir_costs.find(type) != elixir_costs.end()) {
-                    if (elixir_costs[type] < elixir) {
+                    if (elixir_costs[type] > elixir) {
                         cout << "Not enough elixir. Passing turn" << endl;
-                        continue;
                     }
-                    lanes[lane_number-1][pos] = new Defender(type, lane_number-1, pos);
+                    else {
+                        lanes[lane_number-1][pos] = new Defender(type, lane_number-1, pos);
+                        elixir -= elixir_costs[type];
+                    }
+
                 }
                 else {
                     cout << "Invalid defender type. Passing turn" << endl;
-                    continue;
                 }
             } 
             else {
                 cout << "Invalid command. Passing turn. Please enter 'p' or 's'" << endl;
-                continue;
             }
             turn++;
             elixir++;

@@ -10,7 +10,7 @@ void Enemy::takeDamage(int dmg) {
 
 void Enemy::printStatus() const {
     std::cout << "Enemy " << name << " has " << health << " health, "
-              << "at lane " << lane << " and position " << position << "."
+              << "at lane " << lane+1 << " and position " << position << "."
               << std::endl;
 }
 
