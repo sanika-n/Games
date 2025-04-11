@@ -41,7 +41,7 @@ void Defender::attack(std::vector<Enemy*>& enemies) const {
         Enemy* target = enemies[targetIndex];
         std::cout << type << " at position " << position
                   << " attacks enemy at position " << target->getPosition()
-                  << " in lane " << lane
+                  << " in lane " << lane + 1
                   << " for " << attackPower << " damage!" << std::endl;
 
         target->takeDamage(attackPower);
