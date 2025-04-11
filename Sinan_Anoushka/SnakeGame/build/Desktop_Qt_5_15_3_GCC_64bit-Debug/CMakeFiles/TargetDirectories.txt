@@ -1,9 +1,0 @@
-/home/anoushka-kuriakos/Desktop/snakegame1/build/Desktop_Qt_5_15_3_GCC_64bit-Debug/CMakeFiles/snakegame1.dir
-/home/anoushka-kuriakos/Desktop/snakegame1/build/Desktop_Qt_5_15_3_GCC_64bit-Debug/CMakeFiles/edit_cache.dir
-/home/anoushka-kuriakos/Desktop/snakegame1/build/Desktop_Qt_5_15_3_GCC_64bit-Debug/CMakeFiles/rebuild_cache.dir
-/home/anoushka-kuriakos/Desktop/snakegame1/build/Desktop_Qt_5_15_3_GCC_64bit-Debug/CMakeFiles/list_install_components.dir
-/home/anoushka-kuriakos/Desktop/snakegame1/build/Desktop_Qt_5_15_3_GCC_64bit-Debug/CMakeFiles/install.dir
-/home/anoushka-kuriakos/Desktop/snakegame1/build/Desktop_Qt_5_15_3_GCC_64bit-Debug/CMakeFiles/install/local.dir
-/home/anoushka-kuriakos/Desktop/snakegame1/build/Desktop_Qt_5_15_3_GCC_64bit-Debug/CMakeFiles/install/strip.dir
-/home/anoushka-kuriakos/Desktop/snakegame1/build/Desktop_Qt_5_15_3_GCC_64bit-Debug/CMakeFiles/snakegame1_autogen_timestamp_deps.dir
-/home/anoushka-kuriakos/Desktop/snakegame1/build/Desktop_Qt_5_15_3_GCC_64bit-Debug/CMakeFiles/snakegame1_autogen.dir

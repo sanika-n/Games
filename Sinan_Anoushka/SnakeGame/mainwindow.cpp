@@ -11,8 +11,9 @@ MainWindow::MainWindow(QWidget *parent)
     setCentralWidget(game); // Set Game as main UI
 
     resize(400,500);
+    connect(ui->resetButton, &QPushButton::clicked, game, &Game::resetGame);
 
-    //Why one white line at the bottom???
+
 }
 
 MainWindow::~MainWindow()

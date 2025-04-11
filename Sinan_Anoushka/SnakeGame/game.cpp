@@ -7,6 +7,7 @@ const int GRID_SIZE = 20;
 
 Game::Game(QWidget *parent) : QWidget(parent), direction(1)
 {
+
     setFocusPolicy(Qt::StrongFocus); //to detect keyboard clicks
 
     snake.append(QPoint(5, 5));
@@ -16,6 +17,15 @@ Game::Game(QWidget *parent) : QWidget(parent), direction(1)
     connect(timer, &QTimer::timeout, this, &Game::updateGame);
     timer->start(150);
     // every 150 ms, a signal is sent out from timer and received by updateGame
+
+    //reset button is created and kept it hidden till the game runs
+    resetButton = new QPushButton("Reset", this);
+    resetButton->setStyleSheet("background-color: #228B22; color: white; font-weight: bold; padding: 6px; border-radius: 5px;");
+    resetButton->hide();
+
+    // connect reset Button to resetGame function
+    connect(resetButton, &QPushButton::clicked, this, &Game::resetGame);
+
 }
 
 void Game::generateFood()
@@ -99,10 +109,18 @@ void Game::updateGame()
     if (head.ry() >= gridHeight) head.setY(0);
 
     //check for collision
-    if (snake.contains(head))
-    {
+    if (snake.contains(head)) {
         gameOver = true;
-        timer->stop();}
+        timer->stop();
+
+        resetButton->show();  // The resetButton is visible when the game get over
+        int btnWidth = resetButton->sizeHint().width();
+        int btnHeight = resetButton->sizeHint().height();
+        int centerX = (width() - btnWidth) / 2;
+        int centerY = (height() + 50) / 2; // slightly below GAME OVER
+        resetButton->move(centerX, centerY);
+    }
+
 
     snake.prepend(head);
 
@@ -127,3 +145,18 @@ void Game::adjustSpeed()
     newSpeed = qMax(newSpeed, 50); // Minimum speed limit
     timer->setInterval(newSpeed);
 }
+
+//resetGame function implementation
+void Game::resetGame()
+{
+    snake.clear();
+    snake.append(QPoint(5, 5));
+    direction = 1;
+    score = 0;
+    gameOver = false;
+    generateFood();
+    timer->start();
+    resetButton->hide();
+    update();
+}
+
