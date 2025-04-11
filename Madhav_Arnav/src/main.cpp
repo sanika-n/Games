@@ -22,11 +22,7 @@ int randint(int x, int y) {
 
 int main() {
     vector<vector<Defender*>> lanes(3, vector<Defender*>(10, nullptr));
-
-    vector<Enemy*> all_enemies;
-
-
-    
+    vector<Enemy*> all_enemies;    
 
     bool gameOver = false;
     int turn = 0;
@@ -49,6 +45,10 @@ int main() {
         if (randint(1,5)==5) {
             all_enemies.push_back(new Enemy("Goblin", 100, randint(1, 3), 9));
         }
+
+
+        // Loopign through all defenders and calling their attack function
+
         
 
         // Printing the Board
