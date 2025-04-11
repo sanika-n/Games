@@ -7,3 +7,7 @@ void Defender::attack(Enemy& target) const {
     std::cout << "Defender of type " << type << " attacks enemy!" << std::endl;
     target.takeDamage(attackPower);
 }
+
+std::string Defender::getName() const {
+    return type;
+}

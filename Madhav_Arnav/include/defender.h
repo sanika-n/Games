@@ -9,9 +9,11 @@ public:
     Defender(std::string type, int damage);
     void attack(Enemy& target) const;
 
+    std::string getName() const;
+
 private:
     std::string type;
     int attackPower;
 };
 
-#endif // DEFENDER_H
+#endif
