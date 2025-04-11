@@ -98,7 +98,7 @@ int main() {
             else if (command == "s") {
                 int lane_number, pos;
                 iss >> lane_number >> pos;
-                lanes[lane_number-1][pos] = new Defender("Archer", 10);
+                lanes[lane_number-1][pos] = new Defender("Archer", 10, 2);
             } 
             else {
                 cout << "Invalid command. Please enter 'p' or 's lane_number pos'." << endl;
