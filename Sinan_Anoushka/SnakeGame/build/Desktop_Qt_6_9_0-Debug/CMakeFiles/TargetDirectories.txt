@@ -1,0 +1,9 @@
+/home/sinan/git-sinan/Games/Sinan_Anoushka/SnakeGame/build/Desktop_Qt_6_9_0-Debug/CMakeFiles/snakegame1.dir
+/home/sinan/git-sinan/Games/Sinan_Anoushka/SnakeGame/build/Desktop_Qt_6_9_0-Debug/CMakeFiles/edit_cache.dir
+/home/sinan/git-sinan/Games/Sinan_Anoushka/SnakeGame/build/Desktop_Qt_6_9_0-Debug/CMakeFiles/rebuild_cache.dir
+/home/sinan/git-sinan/Games/Sinan_Anoushka/SnakeGame/build/Desktop_Qt_6_9_0-Debug/CMakeFiles/list_install_components.dir
+/home/sinan/git-sinan/Games/Sinan_Anoushka/SnakeGame/build/Desktop_Qt_6_9_0-Debug/CMakeFiles/install.dir
+/home/sinan/git-sinan/Games/Sinan_Anoushka/SnakeGame/build/Desktop_Qt_6_9_0-Debug/CMakeFiles/install/local.dir
+/home/sinan/git-sinan/Games/Sinan_Anoushka/SnakeGame/build/Desktop_Qt_6_9_0-Debug/CMakeFiles/install/strip.dir
+/home/sinan/git-sinan/Games/Sinan_Anoushka/SnakeGame/build/Desktop_Qt_6_9_0-Debug/CMakeFiles/snakegame1_autogen_timestamp_deps.dir
+/home/sinan/git-sinan/Games/Sinan_Anoushka/SnakeGame/build/Desktop_Qt_6_9_0-Debug/CMakeFiles/snakegame1_autogen.dir

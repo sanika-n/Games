@@ -33,10 +33,15 @@ void Game::generateFood()
     int gridWidth = width() / GRID_SIZE;
     int gridHeight = height() / GRID_SIZE;
 
-    int x = QRandomGenerator::global()->bounded(gridWidth);
-    int y = QRandomGenerator::global()->bounded(gridHeight);
-
-    food = QPoint(x, y);
+    //Making sure that the point where food generated is not a part of snake's body
+    while(1){
+        int x = QRandomGenerator::global()->bounded(gridWidth);
+        int y = QRandomGenerator::global()->bounded(gridHeight);
+        food = QPoint(x, y);
+        if(!snake.contains(food)){
+            break;
+        }
+    }
 }
 
 
@@ -44,13 +49,6 @@ void Game::paintEvent(QPaintEvent *event)
 {   QPainter painter(this);
 
     painter.fillRect(rect(), QColor(144, 238, 144)); // Light green
-
-    if (gameOver)
-    {
-        painter.setPen(Qt::red);
-        painter.setFont(QFont("Arial", 24, QFont::Bold));
-        painter.drawText(rect(), Qt::AlignCenter, "GAME OVER");
-    }
 
     // Draw snake
     painter.setBrush(QColor(0, 100, 0));  // Dark Green
@@ -68,6 +66,24 @@ void Game::paintEvent(QPaintEvent *event)
     painter.setBrush(QColor(139, 0, 0));
     painter.setPen(QColor(139, 0, 0));
     painter.drawEllipse(food.x() * GRID_SIZE, food.y() * GRID_SIZE, GRID_SIZE, GRID_SIZE);
+
+
+    // Checking game over after drawing snake to ensure the game over text and score text are displayed on top of the snake and food.
+    if (gameOver)
+    {
+        painter.setPen(Qt::red);
+        painter.setFont(QFont("Arial", 24, QFont::Bold));
+        painter.drawText(rect().adjusted(0, -30, 0, 0), Qt::AlignCenter, "GAME OVER");
+        painter.drawText(rect().adjusted(0, 30, 0, 0), Qt::AlignCenter, QString("Your score is: %1").arg(score));
+
+        resetButton->raise();
+        resetButton->show();  // The resetButton is visible when the game get over
+        int btnWidth = resetButton->sizeHint().width();
+        int btnHeight = resetButton->sizeHint().height();
+        int centerX = (width() - btnWidth) / 2;
+        int centerY = (height() + 70) / 2; // slightly below GAME OVER
+        resetButton->move(centerX, centerY);
+    }
 
     //Draw score
     painter.setPen(Qt::black);
@@ -112,13 +128,6 @@ void Game::updateGame()
     if (snake.contains(head)) {
         gameOver = true;
         timer->stop();
-
-        resetButton->show();  // The resetButton is visible when the game get over
-        int btnWidth = resetButton->sizeHint().width();
-        int btnHeight = resetButton->sizeHint().height();
-        int centerX = (width() - btnWidth) / 2;
-        int centerY = (height() + 50) / 2; // slightly below GAME OVER
-        resetButton->move(centerX, centerY);
     }
 
 
