@@ -14,6 +14,9 @@ Score tracking: Displayed in real-time.
 Game over detection: Ends when the snake collides with itself.
 
 
+Reset Button: Button to reset the game once it gets over.
+
+
 
 ## 🛠️ Technologies Used
 Qt Framework (for GUI and event handling)
@@ -27,7 +30,7 @@ QPainter (for custom rendering)
 
 
 ## 📺 Demo
-(Insert link to a video showcasing gameplay here)
+https://drive.google.com/file/d/1O1ftI8Lax6Fx9ecLhcW0r08f1eWFx4zT/view?usp=sharing
 
 
 
